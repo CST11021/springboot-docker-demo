@@ -65,7 +65,7 @@
 
     <build>
         <!-- 固定的jar的名字，这样Dockerfile可以固定写 -->
-        <finalName>springboot-demo-helloworld</finalName>
+        <finalName>springboot-dockerfile-demo</finalName>
         <!-- 构建的插件 -->
         <plugins>
             <!-- springboot构建jar -->
