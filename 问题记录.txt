@@ -1,0 +1,18 @@
+dockerfile构建 报错arm架构
+摘自：https://www.sky12580.cn/archives/dockerimagebuildfailedonmacm1chip
+
+报错信息
+(fat file, but missing compatible architecture (have 'i386,x86_64', need 'arm64e'))
+
+堆栈信息
+Caused by: com.spotify.docker.client.shaded.javax.ws.rs.ProcessingException: java.lang.UnsatisfiedLinkError: could not load FFI provider jnr.ffi.provider.jffi.Provider
+Caused by: java.lang.UnsatisfiedLinkError: java.lang.UnsatisfiedLinkError: /private/var/folders/hz/rgppp8250rsdp86kf_tfjvqw0000gp/T/jffi8502916075702391528.dylib: dlopen(/private/var/folders/hz/rgppp8250rsdp86kf_tfjvqw0000gp/T/jffi8502916075702391528.dylib, 0x0001): tried: '/private/var/folders/hz/rgppp8250rsdp86kf_tfjvqw0000gp/T/jffi8502916075702391528.dylib' (fat file, but missing compatible architecture (have 'i386,x86_64', need 'arm64e')), '/usr/lib/jffi8502916075702391528.dylib' (no such file)
+
+解决方案
+brew install socat # 安装socat
+nohup socat TCP-LISTEN:2375,range=127.0.0.1/32,reuseaddr,fork UNIX-CLIENT:/var/run/docker.sock &> /dev/null & # 将 unix socket 代理到 tcp 端口
+export DOCKER_HOST=tcp://127.0.0.1:2375 # 设置环境变量
+
+
+官方地址
+https://www.adictosaltrabajo.com/2021/11/12/maven-mac-m1-aarch64-fabric8-docker-maven-plugin/
