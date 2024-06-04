@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class TestController {
 
+    @GetMapping("/hello-world")
+    public String helloWorld() {
+        return "hello world";
+    }
+
     @GetMapping("/test-get")
     public String testGet(@RequestParam String bizCode) {
         return bizCode;
